@@ -1,5 +1,5 @@
 import string
-import cipher_utils
+import stats_utils
 import itertools
 import math
 import stats_data

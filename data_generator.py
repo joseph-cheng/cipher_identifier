@@ -1,11 +1,13 @@
 import numpy as np
 import random
 import string
-import vigenere
-import substitution
 import statistics
-import transposition
-import hill
+
+import encryptors.vigenere
+import encryptors.substitution
+import encryptors.transposition
+import encryptors.hill
+
 
 config = {"vigenere": 0,
               "substitution": 1,
@@ -27,14 +29,14 @@ def generate_data(count, data_file, label_file):
     for keyLen in range(2,15):
         for x in range(count):
             key = random.sample(list(string.ascii_uppercase), keyLen)
-            data.append(vigenere.encrypt_vigenere(pt, key))
+            data.append(encryptors.vigenere.encrypt_vigenere(pt, key))
             labels.append(config["vigenere"])
     print("Generating substitution")
 
     key = list(string.ascii_uppercase)
     for x in range(count):
         random.shuffle(key)
-        data.append(substitution.encrypt_substitution(pt, key))
+        data.append(encryptors.substitution.encrypt_substitution(pt, key))
         labels.append(config["substitution"])
 
     print("Generating transposition")
@@ -42,13 +44,13 @@ def generate_data(count, data_file, label_file):
         key = list(range(keyLen))
         for x in range(count):
             random.shuffle(key)
-            data.append(transposition.encrypt_transposition(pt, key))
+            data.append(encryptors.transposition.encrypt_transposition(pt, key))
             labels.append(config["transposition"])
               
     print("Generating 2x2 Hill")
     for x in range(count):
         key = random.sample(list(string.ascii_uppercase), 4)
-        data.append(hill.encrypt_hill_2(pt, key))
+        data.append(encryptors.hill.encrypt_hill_2(pt, key))
         labels.append(config["hill 2x2"])
     
     print("Generating statistics")
