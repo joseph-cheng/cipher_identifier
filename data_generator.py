@@ -5,6 +5,7 @@ import vigenere
 import substitution
 import statistics
 import transposition
+import hill
 
 def generate_data(count):
     data = []
@@ -12,7 +13,9 @@ def generate_data(count):
 
     config = {"vigenere": 0,
               "substitution": 1,
-              "transposition": 2
+              "transposition": 2,
+              "hill 2x2": 3,
+              "hill 3x3": 4
 
         }
 
@@ -20,10 +23,8 @@ def generate_data(count):
 
     print("Generating vigenere")
     for keyLen in range(2,15):
-        key = random.sample(list(string.ascii_uppercase), keyLen)
-
         for x in range(count):
-            random.shuffle(key)
+            key = random.sample(list(string.ascii_uppercase), keyLen)
             data.append(vigenere.encrypt_vigenere(pt, key))
             labels.append(config["vigenere"])
     print("Generating substitution")
@@ -42,6 +43,17 @@ def generate_data(count):
             data.append(transposition.encrypt_transposition(pt, key))
             labels.append(config["transposition"])
 
+    print("Generating 2x2 Hill")
+    for x in range(count):
+        key = random.sample(list(string.ascii_uppercase), 4)
+            data.append(hill.encrypt_hill_2(pt, key))
+            labels.append(config["hill 2x2"])
+
+    print("Generating 3x3 Hill")
+    for x in range(count):
+        key = random.sample(list(string.ascii_uppercase), 9)
+            data.append(hill.encrypt_hill_3(pt, key))
+            labels.append(config["hill 3x3"])
     print("Generating statistics")
     return np.array(list(map(lambda x: [func(x) for func in statistics.stats_funcs], data))), np.asarray(labels)
         
