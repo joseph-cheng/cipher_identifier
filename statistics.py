@@ -160,4 +160,13 @@ def normor(ct):
 
     return score/350
 
-stats_funcs = [get_ic, max_p_ic, max_kappa, digraphic_ic, even_d_ic, log_digraph, sdd, normor]
+def div_2(ct):
+    return not(len(ct)%2)
+
+def div_3(ct):
+    return not(len(ct)%3)
+
+def has_j(ct):
+    return "J" in ct
+
+stats_funcs = [get_ic, max_p_ic, max_kappa, digraphic_ic, even_d_ic, log_digraph, sdd, normor, div_2, div_3, has_j]
