@@ -20,7 +20,7 @@ def create_model():
     model = keras.Sequential([
         keras.layers.Dense(32, input_shape=(len(statistics.stats_funcs),)),
         keras.layers.Dense(128, activation=tf.nn.relu),
-        keras.layers.Dense(6, activation=tf.nn.softmax)
+        keras.layers.Dense(len(data_generator.config), activation=tf.nn.softmax)
     ])
 
     print("Compiling model...")
