@@ -28,3 +28,4 @@ def encrypt_two_square(pt, key1, key2, horizontal):
 
     return final
 
+print(encrypt_two_square("AABB", "KEY", "WORD", 0))
