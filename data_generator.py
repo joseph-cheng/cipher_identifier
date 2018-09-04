@@ -18,7 +18,7 @@ config = {"vigenere": 0,
               "hill 3x3": 4,
               "twosquare": 5,
               "playfair": 6,
-              "bifid", 7
+              "bifid": 7
 
         }
 
@@ -39,12 +39,12 @@ def generate_data(count, data_file, label_file):
     print("Generating vigenere")
     for keyLen in range(2,15):
         for x in range(count):
-            key = random.sample(ascii_uppercase_l), keyLen)
+            key = random.sample(ascii_uppercase_l, keyLen)
             data.append(encryptors.vigenere.encrypt_vigenere(random.choice(pts), key))
             labels.append(config["vigenere"])
     print("Generating substitution")
 
-    key = sascii_uppercase_l
+    key = ascii_uppercase_l
     for x in range(count):
         random.shuffle(key)
         data.append(encryptors.substitution.encrypt_substitution(random.choice(pts), key))
@@ -66,14 +66,14 @@ def generate_data(count, data_file, label_file):
 
     print("Generating 3x3 hill")
     for x in range(count):
-        key = random.sample(ascii_uppercase_l), 9)
+        key = random.sample(ascii_uppercase_l, 9)
         data.append(encryptors.hill.encrypt_hill_3(random.choice(pts), key))
         labels.append(config["hill 3x3"])
         
     print("Generating twosquare")
     for x in range(count):
-        key = random.sample(ascii_uppercase_l, random.randint(1,26))
-        key = random.sample(ascii_uppercase_l, random.randint(1,26))
+        key1 = random.sample(ascii_uppercase_l, random.randint(1,26))
+        key2 = random.sample(ascii_uppercase_l, random.randint(1,26))
 
         data.append(encryptors.twosquare.encrypt_two_square(random.choice(pts), key1, key2, 0))
         labels.append(config["twosquare"])
