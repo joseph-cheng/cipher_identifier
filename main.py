@@ -8,18 +8,19 @@ import random
 import statistics
 import os
 
+# Setup saving checkpoints
 checkpoint_path = "training_1/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path, 
                                                  save_weights_only=True,
                                                  verbose=1)
-
+# Creates untrained model
 def create_model():
     print("Creating model...")
     model = keras.Sequential([
         keras.layers.Dense(32, input_shape=(len(statistics.stats_funcs),)),
         keras.layers.Dense(128, activation=tf.nn.relu),
-        keras.layers.Dense(4, activation=tf.nn.softmax)
+        keras.layers.Dense(6, activation=tf.nn.softmax)
     ])
 
     print("Compiling model...")
@@ -29,6 +30,7 @@ def create_model():
 
     return model
 
+#Takes in a model and ciphertext and asks the neural network what cipher it is
 def predict(m, ct):
     test = np.array([func(ct) for func in statistics.stats_funcs])
     test = (np.expand_dims(test,0))
@@ -37,19 +39,20 @@ def predict(m, ct):
         print(data_generator.reverse_config[probability[1]], probability[0])
     
 
-#print("Generating data...")
+print("Generating data...")
 #data_generator.generate_data(1000, "data/train_data.dat", "data/train_labels.dat")
 #data_generator.generate_data(100, "data/test_data.dat", "data/test_labels.dat")
 
-train_data = np.load("data/train_data.dat")
-train_labels = np.load("data/train_labels.dat")
+#Load in data
+#train_data = np.load("data/train_data.dat")
+#train_labels = np.load("data/train_labels.dat")
 test_data = np.load("data/test_data.dat")
 test_labels = np.load("data/test_labels.dat")
 
 model = create_model()
 print("Training model...")
-model.fit(train_data, train_labels, epochs=5,
-          callbacks = [cp_callback])
+#model.fit(train_data, train_labels, epochs=5,
+ #         callbacks = [cp_callback])
           
 model.load_weights(checkpoint_path)
 
