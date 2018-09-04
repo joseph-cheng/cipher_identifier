@@ -22,7 +22,7 @@ def encrypt_playfair(pt, key):
         pos2 = [square.index(char2) % 5, square.index(char2) // 5]
 
         if pos1[0] == pos2[0]:
-            final += square[pos1[0]+((pos1[1]+) % 5)*5] + square[pos2[0]+((pos2[1]+1) % 5)*5]
+            final += square[pos1[0]+((pos1[1]) % 5)*5] + square[pos2[0]+((pos2[1]+1) % 5)*5]
         elif pos1[1] == pos2[1]:
             final += square[(pos1[0]+1)%5 + pos1[1]*5] + square[(pos2[0]+1)%5 + pos2[1]*5]
 
