@@ -40,19 +40,19 @@ def predict(m, ct):
     
 
 print("Generating data...")
-#data_generator.generate_data(1000, "data/train_data.dat", "data/train_labels.dat")
-#data_generator.generate_data(100, "data/test_data.dat", "data/test_labels.dat")
+data_generator.generate_data(1000, "data/train_data.dat", "data/train_labels.dat")
+data_generator.generate_data(100, "data/test_data.dat", "data/test_labels.dat")
 
 #Load in data
-#train_data = np.load("data/train_data.dat")
-#train_labels = np.load("data/train_labels.dat")
+train_data = np.load("data/train_data.dat")
+train_labels = np.load("data/train_labels.dat")
 test_data = np.load("data/test_data.dat")
 test_labels = np.load("data/test_labels.dat")
 
 model = create_model()
 print("Training model...")
-#model.fit(train_data, train_labels, epochs=5,
- #         callbacks = [cp_callback])
+model.fit(train_data, train_labels, epochs=5,
+          callbacks = [cp_callback])
           
 model.load_weights(checkpoint_path)
 
