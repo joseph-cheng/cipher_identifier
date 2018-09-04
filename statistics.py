@@ -134,4 +134,11 @@ def div_3(ct):
 def has_j(ct):
     return "J" in ct
 
-stats_funcs = [get_ic, max_p_ic, max_kappa, digraphic_ic, even_d_ic, log_digraph, sdd, normor, div_2, div_3, has_j]
+def dbl(ct):
+    if len(ct) % 2 == 0:
+        for it in range(0, len(ct)-1, 2):
+            if ct[it] == ct[it+1]:
+                return 1
+
+    return 0
+stats_funcs = [get_ic, max_p_ic, max_kappa, digraphic_ic, even_d_ic, log_digraph, sdd, normor, div_2, div_3, has_j, dbl]
